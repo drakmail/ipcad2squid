@@ -22,7 +22,7 @@ class Ipcad2squid
     end.join("\n")
   end
 
-  def clear
+  def clear_accounting
     # move statistics to checkpoint and clear
     `netkit-rsh localhost clear ip accounting` rescue puts "Couldn't clear ip accounting"
   end

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './lib/ipcad2squid.rb'
+require 'ipcad2squid'
 require 'optparse'
 
 options = {}
@@ -24,5 +24,5 @@ end
 optparse.parse!
 
 ipcad2squid = Ipcad2squid.new(options)
-ipcad2squid.clear
+ipcad2squid.clear_accounting
 ipcad2squid.write_to_file
