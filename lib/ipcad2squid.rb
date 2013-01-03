@@ -22,6 +22,7 @@ class Ipcad2squid
     # parse and output data
     accounting_data.map do |raw_data|
       data = raw_data.split
+      next unless data[1] =~ /#{@net}/
       "#{@ttime}.000 1 #{data[1]} TCP_MISS/200 #{data[3]} CONNECT #{data[0]}:#{data[4]} - DIRECT/#{data[1]} -"
     end.join("\n")
   end

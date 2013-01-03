@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'ipcad2squid'
-  s.version     = '1.1.1'
+  s.version     = '1.2'
   s.date        = '2013-01-03'
   s.summary     = "Convert ipcad logs to squid logs"
   s.description = "Simple gem for converting and appending output from ipcad to squid logs formats"
