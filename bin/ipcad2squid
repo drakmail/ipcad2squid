@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+require './lib/ipcad2squid.rb'
+require 'optparse'
+
+options = {}
+
+optparse = OptionParser.new do|opts|
+  opts.banner = "Usage: #{__FILE__} [-1] [-2] [-n] [-o] [-h]"
+  opts.separator  "Options"
+
+  # Define the options, and what they do
+  opts.on( '-1', '--cmd1 COMMAND', 'Command to show accounting information') { |value| options[:cmd1] = value }
+  opts.on( '-2', '--cmd2 COMMAND', 'Command to show accounting checkpoint information') { |value| options[:cmd2] = value }
+  opts.on( '-n', '--network SUBNET', 'Subnet for filtering (like 192.168.0)') { |value| options[:net] = value }
+  opts.on( '-o', '--output COMMAND', 'Log file to append output') { |value| options[:filename] = value }
+
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    print opts
+    exit
+  end
+end
+
+optparse.parse!
+
+ipcad2squid = Ipcad2squid.new(options)
+ipcad2squid.clear
+ipcad2squid.write_to_file
