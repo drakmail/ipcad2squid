@@ -8,7 +8,11 @@ class Ipcad2squid
     @cmd2     = options[:cmd2]     || 'netkit-rsh localhost show ip accounting checkpoint'
     @net      = options[:net]      || '192.168.0'
     @filename = options[:filename] || '/var/log/squid/access.log'
-    @ttime    = `#{@cmd1}`.split("\n").grep(/saved/) { |saved| saved.split.last }.first rescue '0'
+    begin
+      @ttime  = `#{@cmd1}`.split("\n").grep(/saved/) { |saved| saved.split.last }.first
+    rescue
+      @ttime  = '0'
+    end
   end
 
   def output
@@ -24,7 +28,11 @@ class Ipcad2squid
 
   def clear_accounting
     # move statistics to checkpoint and clear
-    `netkit-rsh localhost clear ip accounting` rescue puts "Couldn't clear ip accounting"
+    begin
+      `netkit-rsh localhost clear ip accounting`
+    rescue
+      puts "Couldn't clear ip accounting"
+    end
   end
 
   def write_to_file
