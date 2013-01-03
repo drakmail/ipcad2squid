@@ -24,7 +24,7 @@ class Ipcad2squid
       data = raw_data.split
       next unless data[1] =~ /#{@net}/
       "#{@ttime}.000 1 #{data[1]} TCP_MISS/200 #{data[3]} CONNECT #{data[0]}:#{data[4]} - DIRECT/#{data[1]} -"
-    end.join("\n")
+    end.join("\n").gsub(/^$\n/, '')
   end
 
   def clear_accounting
